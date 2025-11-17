@@ -3,7 +3,7 @@ import gsap from 'gsap'
 import { useMediaQuery } from 'react-responsive'
 
 const Showcase = () => {
-  const isTablet = useMediaQuery({query: '(max-width: 1024)'})
+  const isTablet = useMediaQuery({query: '(max-width: 1024px)'})
 
   useGSAP(() => {
     if (!isTablet) {
@@ -17,11 +17,21 @@ const Showcase = () => {
         }
       });
 
-      timeline.to('.mask img', {
-        transform: 'scale(1.1)'
-      }).to('.content', {opacity: 1, y: 0, ease: 'power1.in'});
+      timeline
+        .fromTo('.mask img', 
+          { scale: 1 },
+          { scale: 1.1 }
+        )
+        .fromTo('.content', 
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, ease: 'power1.in' }
+        );
+
+      return () => {
+        timeline.kill();
+      };
     }
-  }, [!isTablet])
+  }, [isTablet])
 
   return (
     <section id='showcase'>
