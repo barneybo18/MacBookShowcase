@@ -20,21 +20,17 @@ export default function MacbookModel14(props) {
 
   const texture = useTexture('/screen.png');
   texture.colorSpace = SRGBColorSpace;
-  texture.needsUpdate = true;
+    texture.needsUpdate = true;
 
   useEffect(() => {
     scene.traverse((child) => {
-      if (child.isMesh) {
-        if(!noChangeParts.includes(child.name)){
-          if (!child.material.userData.cloned) {
-            child.material = child.material.clone();
-            child.material.userData.cloned = true;
+          if (child.isMesh) {
+            if(!noChangeParts.includes(child.name)){
+              child.material.color = new Color(color);
+            }
           }
-          child.material.color = new Color(color);
-        }
-      }
-    })
-  }, [color, scene])
+        })
+      }, [color, scene]);
 
   return (
     <group {...props} dispose={null}>
