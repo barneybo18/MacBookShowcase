@@ -31,52 +31,50 @@ const Performance = () => {
        )
 
        // Image timeline - only on desktop
-      if (window.innerWidth > 1024) {
       ScrollTrigger.matchMedia({
         "(min-width: 1025px)": () => {
-         const timeline = gsap.timeline({
-           scrollTrigger: {
-             trigger: sectionRef.current,
-             start: 'top center',
-             end: 'bottom center',
-             scrub: 1,
-             markers: false,
-             onUpdate: (self) => {
-               // Timeline updates smoothly with scroll
-             },
-           },
-         })
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top center',
+              end: 'bottom center',
+              scrub: 1,
+              markers: false,
+              onUpdate: (self) => {
+                // Timeline updates smoothly with scroll
+              },
+            },
+          })
 
-         // Animate all images at time 0
-         performanceImgPositions.forEach(({ id, left, right, bottom, transform }) => {
-           // Skip p5
-           if (id === 'p5') return
+          // Animate all images at time 0
+          performanceImgPositions.forEach(({ id, left, right, bottom, transform }) => {
+            // Skip p5
+            if (id === 'p5') return
 
-           const img = sectionRef.current?.querySelector(`.${id}`)
-           if (!img) return
+            const img = sectionRef.current?.querySelector(`.${id}`)
+            if (!img) return
 
-           timeline.fromTo(
-             img,
-             { opacity: 0, y: 50 },
-             { opacity: 1, y: 0, duration: 1 },
-             0
-           )
+            timeline.fromTo(
+              img,
+              { opacity: 0, y: 50 },
+              { opacity: 1, y: 0, duration: 1 },
+              0
+            )
 
-           // Animate to final position
-           timeline.to(
-             img,
-             {
-               ...(left !== undefined && { left: `${left}%` }),
-               ...(right !== undefined && { right: `${right}%` }),
-               ...(bottom !== undefined && { bottom: `${bottom}%` }),
-               ...(transform && { transform }),
-             },
-             0
-           )
-         })
+            // Animate to final position
+            timeline.to(
+              img,
+              {
+                ...(left !== undefined && { left: `${left}%` }),
+                ...(right !== undefined && { right: `${right}%` }),
+                ...(bottom !== undefined && { bottom: `${bottom}%` }),
+                ...(transform && { transform }),
+              },
+              0
+            )
+          })
         }
       })
-      }
      },
      { scope: sectionRef }
    )
