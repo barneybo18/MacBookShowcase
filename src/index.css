@@ -34,6 +34,15 @@
   );
 }
 
+@keyframes metalicReflection {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 @theme {
   --font-regular: "Regular";
   --font-medium: "Medium";
@@ -325,10 +334,34 @@ body {
         }
 
         div:last-of-type {
-          @apply bg-[#1D1D1F] p-10 rounded-3xl flex items-center gap-7;
+          @apply bg-[#1D1D1F] p-10 rounded-3xl flex items-center gap-7 relative overflow-hidden;
+          background: linear-gradient(135deg, #2a2a2a 0%, #1D1D1F 50%, #2a2a2a 100%);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.3);
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+              transparent 0%, 
+              rgba(255, 255, 255, 0.15) 25%,
+              rgba(255, 255, 255, 0.3) 50%,
+              rgba(255, 255, 255, 0.15) 75%,
+              transparent 100%
+            );
+            animation: metalicReflection 6s ease-in-out infinite;
+            pointer-events: none;
+          }
 
           p {
-            @apply font-semibold lg:text-2xl 2xl:text-3xl;
+            @apply font-semibold lg:text-2xl 2xl:text-3xl relative z-10;
+          }
+
+          img {
+            @apply relative z-10;
           }
         }
       }
