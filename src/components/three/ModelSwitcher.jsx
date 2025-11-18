@@ -1,5 +1,5 @@
 import { PresentationControls } from '@react-three/drei';
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import MacbookModel14 from '../models/Macbook-14.jsx';
 import MacbookModel16 from '../models/Macbook-16.jsx';
 import gsap from 'gsap';
@@ -36,6 +36,7 @@ const ModelSwitcher = ({scale, isMobile}) => {
     const SCALE_LARGE_MOBILE = 0.05;
     const smallMacbookRef = useRef();
     const largeMacbookRef = useRef();
+    const touchStartRef = useRef({ x: 0, y: 0 });
 
     const showLargeMacbook = scale === SCALE_LARGE_DESKTOP|| scale === SCALE_LARGE_MOBILE
 
@@ -56,12 +57,45 @@ const ModelSwitcher = ({scale, isMobile}) => {
         }
     },[scale])
 
-    const controlsConfig = {
+    // Enable touch controls for mobile
+    useEffect(() => {
+        if (!isMobile) return;
+
+        const canvas = document.querySelector('canvas');
+        if (!canvas) return;
+
+        const handleTouchStart = (e) => {
+            touchStartRef.current = {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY
+            };
+        };
+
+        const handleTouchEnd = (e) => {
+            // Prevent default zoom/scroll behavior on mobile
+            e.preventDefault();
+        };
+
+        canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+        canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+        return () => {
+            canvas.removeEventListener('touchstart', handleTouchStart);
+            canvas.removeEventListener('touchend', handleTouchEnd);
+        };
+    }, [isMobile]);
+
+    const controlsConfig = isMobile ? {
+        snap: false,
+        speed: 2,
+        zoom: 1,
+        azimuth: [ -Infinity, Infinity],
+        config: { mass: 1, tension: 0, friction: 18 }
+    } : {
         snap: true,
         speed: 1.6,
         zoom: 1,
-        // polar: [ -Math.PI, Math.PI ], //Vertical rotation limits
-        azimuth: [ -Infinity, Infinity], //Horizontal rotation limits
+        azimuth: [ -Infinity, Infinity],
         config: { mass: 1, tension: 0, friction: 26 }
     }
 
