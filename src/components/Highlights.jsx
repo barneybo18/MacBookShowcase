@@ -18,7 +18,7 @@ const Highlights = () => {
       stagger: 0.5,
       ease: 'power1.inOut',
     })
-  })
+  }, [isMobile])
 
   return (
     <section id='highlights'>
@@ -49,7 +49,7 @@ const Highlights = () => {
           <div>
             <img src='/battery.png' alt='battery' />
             <p>Up to <span className='green-gradient'>{' '}14 more hours{' '}</span> 
-            battery life. 
+            battery life. <br />
             <span className='text-dark-100'>{' '}(Up to 24 hours total.)</span></p>
           </div>
         </div>
