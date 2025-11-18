@@ -325,16 +325,16 @@ body {
           @apply h-full bg-[url(/highlight-bg.png)] bg-no-repeat bg-cover p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
 
           p {
-            @apply font-semibold text-4xl max-w-2xs;
+            @apply font-semibold text-2xl md:text-4xl max-w-2xs;
           }
         }
 
         p {
-          @apply font-semibold text-4xl max-w-2xs;
+          @apply font-semibold text-2xl md:text-4xl max-w-2xs;
         }
 
         div:last-of-type {
-          @apply bg-[#1D1D1F] p-10 rounded-3xl flex items-center gap-7 relative overflow-hidden;
+          @apply bg-[#1D1D1F] p-6 md:p-10 rounded-3xl flex flex-col md:flex-row items-center gap-4 md:gap-7 relative overflow-hidden;
           background: linear-gradient(135deg, #2a2a2a 0%, #1D1D1F 50%, #2a2a2a 100%);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.3);
 
@@ -357,11 +357,11 @@ body {
           }
 
           p {
-            @apply font-semibold lg:text-2xl 2xl:text-3xl relative z-10;
+            @apply font-semibold text-base md:text-2xl 2xl:text-3xl relative z-10;
           }
 
           img {
-            @apply relative z-10;
+            @apply relative z-10 w-12 md:w-16 flex-shrink-0;
           }
         }
       }
@@ -370,10 +370,10 @@ body {
         @apply flex flex-col justify-between gap-5 opacity-0 -translate-y-5;
 
         p {
-          @apply font-semibold text-4xl max-w-2xs;
+          @apply font-semibold text-2xl md:text-4xl max-w-2xs;
         }
         .apple-gradient {
-          @apply p-10 rounded-3xl flex items-center gap-7 relative;
+          @apply p-6 md:p-10 rounded-3xl flex flex-col md:flex-row items-center gap-4 md:gap-7 relative;
 
           background: #1d1d1f;
           background-clip: padding-box; /* !important */
@@ -397,7 +397,7 @@ body {
           }
 
           p {
-            @apply font-semibold lg:text-2xl 2xl:text-3xl;
+            @apply font-semibold text-base md:text-2xl 2xl:text-3xl;
 
             span {
               background: linear-gradient(
@@ -412,13 +412,17 @@ body {
               -webkit-text-fill-color: transparent;
             }
           }
+
+          img {
+            @apply w-12 md:w-16 flex-shrink-0;
+          }
         }
 
         div:last-of-type {
-          @apply h-full bg-[#1D1D1F] p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
+          @apply h-full bg-[#1D1D1F] p-6 md:p-10 2xl:pt-32 md:pt-20 rounded-3xl;
 
           p {
-            @apply font-semibold text-4xl max-w-sm;
+            @apply font-semibold text-lg md:text-4xl max-w-sm;
 
             .green-gradient {
               background: linear-gradient(90deg, #35a98a 0%, #6dd400 100%);
