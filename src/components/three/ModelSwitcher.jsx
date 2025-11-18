@@ -58,7 +58,7 @@ const ModelSwitcher = ({scale, isMobile}) => {
 
     const controlsConfig = {
         snap: true,
-        speed: 1,
+        speed: 1.6,
         zoom: 1,
         // polar: [ -Math.PI, Math.PI ], //Vertical rotation limits
         azimuth: [ -Infinity, Infinity], //Horizontal rotation limits
