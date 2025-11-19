@@ -42,10 +42,10 @@ const Showcase = () => {
               </span>
               . M4 POWERS!
             <p>
-              A town hall different from bala blu, blue blu bulaba. broom broom broom brooooooooom. Bala blu blue blu bulaba.
+              Experience unprecedented speed with our custom-engineered chip. The M4 delivers groundbreaking performance for demanding workflows, from 8K video editing to 3D rendering at lightning-fast speeds.
             </p>
             <p className=''>
-              A town hall different from bala blu, blue blu bulaba. broom broom broom brooooooooom. Bala blu blue blu bulaba.
+              Built with advanced neural processing, the M4 accelerates machine learning tasks while maintaining exceptional power efficiency. Get more done without draining your battery.
             </p>
             <p className='text-primary'>Learn More about Apple Intelligence</p>
           </div>
