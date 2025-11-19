@@ -33,56 +33,39 @@ const ModelScroll = () => {
   }, [])
   
   useGSAP(() =>{
-    // 3D Model scroll animation - only on desktop
-    if (!isMobile) {
-      const modelTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#f-canvas',  
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-          pin: true,
-        }
-      });
-
-      // Spin the 3D model
-      if (groupRef.current) {
-        modelTimeline.to(groupRef.current.rotation, {y: Math.PI * 2, ease: 'power1.inOut'});
+    // 3D Model scroll animation
+    const modelTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#f-canvas',  
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+        pin: true,
       }
+    });
+
+    //Synchronize feature video changes with scroll position
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#f-canvas',
+        start: 'top center',
+        end: 'bottom top',
+        scrub: 1,
+    }
+    });
+
+    // Spin the 3D model
+    if (groupRef.current) {
+      modelTimeline.to(groupRef.current.rotation, {y: Math.PI * 2, ease: 'power1.inOut'});
     }
 
-    //Synchronize feature video changes with scroll position - only on desktop
-    if (!isMobile) {
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#f-canvas',
-          start: 'top center',
-          end: 'bottom top',
-          scrub: 1,
-        }
-      });
-
-      // Content and texture sync
-      featureSequence.forEach((feature, index) => {
-        timeline
-          .call(() => setTexture(feature.videoPath), undefined, index === 0 ? 0 : undefined)
-          .to(feature.boxClass, {opacity: 1, y: 0}, index === 0 ? `<${feature.delay}` : undefined)
-      })
-    } else {
-      // Mobile: animate all boxes without scroll trigger
-      featureSequence.forEach((feature, index) => {
-        gsap.to(feature.boxClass, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: index * 0.2,
-          ease: 'power2.out'
-        });
-      });
-      // Set first texture on mobile
-      setTexture(featureSequence[0].videoPath);
-    }
-  }, [isMobile, setTexture])
+    // COntent and texture sync
+    featureSequence.forEach((feature, index) => {
+      timeline
+        .call(() => setTexture(feature.videoPath), undefined, index === 0 ? 0 : undefined)
+        .to(feature.boxClass, {opacity: 1, y: 0}, index === 0 ? `<${feature.delay}` : undefined)
+    })
+  }, [])
 
   return (
     <group ref={groupRef}>
