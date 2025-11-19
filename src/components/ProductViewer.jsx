@@ -52,16 +52,29 @@ const ProductViewer = () => {
         </div>
 
         {/* 3d canvas  */}
-        <Canvas id='canvas' camera={{position: [0, 2, 5], fov: 50, near: 0.1, far: 100}}>
-            {/* <Box position={[0, 0, 0]} scale={10 * scale} material-color={color}></Box> */}
-            <StudioLights />
+        <div className='canvas-wrapper'>
+          <Canvas id='canvas' camera={{position: [0, 2, 5], fov: 50, near: 0.1, far: 100}}>
+              {/* <Box position={[0, 0, 0]} scale={10 * scale} material-color={color}></Box> */}
+              <StudioLights />
 
-            {/* <MacbookModel14 scale={0.06} position={[0, 0, 0]} /> */}
+              {/* <MacbookModel14 scale={0.06} position={[0, 0, 0]} /> */}
 
-            {/* for interacting with the 3d model */}
-            {/* <OrbitControls enableZoom={false}/> */}
-            <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
-        </Canvas>
+              {/* for interacting with the 3d model */}
+              {/* <OrbitControls enableZoom={false}/> */}
+              <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
+          </Canvas>
+          {/* Scroll zone overlay on canvas with prompt */}
+          {isMobile && (
+            <div className='scroll-zone'>
+              <p>Click here to scroll</p>
+            </div>
+          )}
+          {isMobile && (
+            <div className='scroll-zone-top'>
+              <p>Click here to scroll</p>
+            </div>
+          )}
+        </div>
     </section>
   )
 }

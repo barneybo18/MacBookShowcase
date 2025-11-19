@@ -191,8 +191,37 @@ body {
       }
     }
 
+    .canvas-wrapper {
+      @apply relative;
+    }
+
     #canvas {
       @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
+    }
+
+    .scroll-zone {
+      @apply absolute bottom-52 left-1/2 -translate-x-1/2 w-20 h-20 rounded-lg lg:hidden flex items-center justify-center z-50;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: grab;
+      backdrop-filter: blur(4px);
+      opacity: 0.3;
+
+      p {
+        @apply text-xs text-center text-white/60 font-medium;
+      }
+    }
+    .scroll-zone-top {
+      @apply absolute top-8 left-1/2 -translate-x-1/2 w-20 h-20 rounded-lg lg:hidden flex items-center justify-center z-50;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: grab;
+      backdrop-filter: blur(4px);
+      opacity: 0.3;
+
+      p {
+        @apply text-xs text-center text-white/60 font-medium;
+      }
     }
   }
 
