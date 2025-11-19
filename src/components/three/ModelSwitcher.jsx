@@ -1,4 +1,4 @@
-import { OrbitControls } from '@react-three/drei';
+import { PresentationControls } from '@react-three/drei';
 import { useRef } from 'react'
 import MacbookModel14 from '../models/Macbook-14.jsx';
 import MacbookModel16 from '../models/Macbook-16.jsx';
@@ -56,39 +56,29 @@ const ModelSwitcher = ({scale, isMobile}) => {
         }
     },[scale])
 
-    const controlsConfig = isMobile ? {
-        enableZoom: false,
-        enablePan: false,
-        autoRotate: false,
-        enableDamping: true,
-        dampingFactor: 0.05,
-        rotateSpeed: 0.5
-    } : {
-        enableZoom: false,
-        enablePan: false,
-        autoRotate: false,
-        enableDamping: true,
-        dampingFactor: 0.1,
-        rotateSpeed: 1
+    const controlsConfig = {
+        snap: true,
+        speed: 1.6,
+        zoom: 1,
+        // polar: [ -Math.PI, Math.PI ], //Vertical rotation limits
+        azimuth: [ -Infinity, Infinity], //Horizontal rotation limits
+        config: { mass: 1, tension: 0, friction: 26 }
     }
 
-    return (
-        <>
-                <OrbitControls
-                    makeDefault
-                    enableZoom={false}
-                    enablePan={false}
-                    enableDamping={controlsConfig.enableDamping}
-                    dampingFactor={controlsConfig.dampingFactor}
-                    rotateSpeed={controlsConfig.rotateSpeed}
-                />
-                <group ref={largeMacbookRef}>
-            <MacbookModel16 scale={isMobile ? 0.05 : 0.08} />
-        </group>
+  return (
+    <>
+        <PresentationControls {...controlsConfig}>
+            <group ref={largeMacbookRef}>
+                <MacbookModel16 scale={isMobile ? 0.05 : 0.08} />
+            </group>
+        </PresentationControls> 
 
-        <group ref={smallMacbookRef}>
-            <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
-        </group>
+        <PresentationControls {...controlsConfig}>
+                    <group ref={smallMacbookRef}>
+                        <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
+                    </group>
+        </PresentationControls> 
+        
     </>
   )
 }
