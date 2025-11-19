@@ -1,5 +1,5 @@
 import React from 'react'
-import useMacbookStore from '../store/index.js'
+import useMacbookStore from '../store'
 import clsx from 'clsx'
 import { Box, OrbitControls } from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
